@@ -1,0 +1,24 @@
+name: pre-installed tools
+
+on:
+    push:
+        branches: ["main"]
+
+    workflow_dispatch:
+jobs:
+  versions:
+    runs-on: ubuntu-latest
+    steps:
+        - name: print the versions
+          run: |
+            echo "docker version"
+            docker --version
+            echo ""
+            echo "python version"
+            python3 --version
+            echo ""
+            echo "node version"
+            node --version
+            echo ""
+            echo "git version"
+            git --version
