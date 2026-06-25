@@ -1,1 +1,35 @@
+name: GitHub-Hosted Runners
 
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  job-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print the below informations
+        run: |
+          echo "the os name: $(uname -s)"
+          echo "the runner's hostname: $(hostname)"
+          echo "the current user running the job: $(whoami)"
+
+  job-windows:
+    runs-on: windows-latest
+    steps:
+      - name: print the system
+        shell: pwsh
+        run: |
+          echo "OS: Windows"
+          echo "Hostname: $env:COMPUTERNAME"
+          echo "Current user: $env:USERNAME"
+
+  job-macos:
+    runs-on: macos-latest
+    steps:
+      - name: print the system
+        run: |
+          echo "OS: $(uname -a)"
+          echo "Hostname: $(hostname)"
+          echo "Current user: $(whoami)"
