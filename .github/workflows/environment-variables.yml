@@ -1,0 +1,26 @@
+name: Environment Variables Demo
+on:
+    workflow_dispatch:
+env:
+   APP_NAME: "myapp"
+jobs:
+    demo:
+       runs-on: ubuntu-latest
+       env:
+          ENVIRONMENT: "staging"
+       steps:
+         - name: checkout code
+           uses: actions/checkout @v4
+
+         - name: print variables
+           env:
+              version: 1.0.0
+           run: |
+             echo "==== environment variables ===="
+             echo "App name(workflow level): $APP_NAME"
+             echo "Environment(job level): $ENVIRONMENT"
+             echo "Version(step level): $VERSION"
+
+             echo "==== github context variables ===="
+             echo "commit SHA: ${{github.sha}}"
+             echo "Actor: ${{github.actor}}"
