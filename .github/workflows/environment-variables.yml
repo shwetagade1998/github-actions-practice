@@ -10,7 +10,7 @@ jobs:
           ENVIRONMENT: "staging"
        steps:
          - name: checkout code
-           uses: actions/checkout @v4
+           uses: actions/checkout@v4
 
          - name: print variables
            env:
