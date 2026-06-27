@@ -1,0 +1,22 @@
+name: self-hosted runner
+
+on:
+    push:
+        branches: ["main"]
+    workflow_dispatch:
+jobs:
+    test-selfhosted:
+        runs-on: self-hosted
+        steps:
+            - name: print the below informations
+              run: |
+                echo "name of the hostname: $(uname -n)"
+                echo "working directory: $(pwd)"
+            - name: create the file
+              run: |
+                echo "Hello from self-hosted runner" > self-hosted-test.txt
+
+            - name: serach for the file
+              run: |
+                ls -l
+                cat self-hosted-test.txt
