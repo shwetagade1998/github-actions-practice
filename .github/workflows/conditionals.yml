@@ -1,0 +1,40 @@
+name: conditionals demo
+on:
+  push:
+    branches: 
+        - main
+        - dev
+  pull_request:
+    branches:
+        - main
+
+jobs:
+  conditional-test:
+    runs-on: ubuntu-latest
+    steps:
+        - name: checkout code
+          uses: actions/checkout@v4
+
+        - name: run the risky cmd that might fail
+          id: risky-step
+          continue-on-error: true
+          run: |
+            echo "simulating failure"
+            exit 1
+        - name: handle failure
+          if: steps.risky-step.outcome == 'failure'
+          run: | 
+            echo "the risky step failed,but i am running to fix it"
+        - name: production deploy check
+          if: github.ref == 'refs/heads/main'
+          run: |
+            echo "this step only run bez we are on main branch."
+
+
+  push-only-job:
+        runs-on: ubuntu-latest
+        if: github.event_name == 'push'
+        steps:
+            - name: excute push only tasks
+              run: |
+                echo "this entire job runs only on push events, not on pull requests."
