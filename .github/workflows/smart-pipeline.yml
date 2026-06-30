@@ -1,5 +1,6 @@
 name: smart pipeline
-on: [push]
+on:
+ workflow_dispatch:
 
 jobs:
     lint:
@@ -40,4 +41,4 @@ jobs:
               run: |
                 echo "=== summary of the smart pipeline ==="
                 echo "Branch type: $BRANCH_TYPE"
-                echo "commit meassage: ${ {github.event.head_commit.message }}"
+                echo "commit meassage: ${{ github.event.head_commit.message }}"
